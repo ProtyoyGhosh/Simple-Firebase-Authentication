@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, /* signInWithEmailAndPassword  */ } from "firebase/auth";
 import firebaseInitialize from '../FireBase/Firebase-initialize';
 
 firebaseInitialize();
@@ -8,6 +8,7 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassord] = useState('');
     const [user, setUser] = useState({});
+    // const [error, setError] = useState('');
 
     const handleEmailInput = (event) => {
         setEmail(event.target.value)
@@ -15,7 +16,7 @@ const Register = () => {
 
     const handlePasswordInput = (event) => {
         if (event.target.value.length < 6) {
-            console.log('baler password diso')
+            console.error('baler password diso')
         } else {
             setPassord(event.target.value)
         }
@@ -53,13 +54,6 @@ const Register = () => {
                     </div>
                     <button type="submit" class="btn btn-success">Register</button>
                 </form>
-                {/*  <div className='p-3'>
-                    <button type="submit" class="btn btn-success me-3">Sign In with Google</button>
-                    <button type="submit" class="btn btn-success me-3">Sign In with Github</button>
-                    <br />
-                    <button type="submit" class="btn btn-danger me-3 mt-3">Password Reset</button>
-
-                </div> */}
             </div>
         </div>
     );

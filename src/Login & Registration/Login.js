@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import firebaseInitialize from '../FireBase/Firebase-initialize';
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 
 
 firebaseInitialize();
@@ -10,6 +10,9 @@ const Login = () => {
     const githubProvider = new GithubAuthProvider();
 
     const [user, setUser] = useState({});
+    const [email, setEmail] = useState('');
+    const [password, setPassord] = useState('');
+    const [error, setError] = useState('');
 
     const signInWithGoogle = () => {
         signInWithPopup(auth, googleProvider)
@@ -21,6 +24,25 @@ const Login = () => {
                     Photo: photoURL
                 }
                 setUser(userInfo);
+            })
+    }
+
+    const handleLogin = event => {
+        event.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                const { displayName, email, photoURL } = result.user;
+                const userInfo = {
+                    Name: displayName,
+                    Email: email,
+                    Photo: photoURL
+                }
+                setUser(userInfo);
+                setError('')
+            }).catch(error => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setError(errorMessage);
             })
     }
 
@@ -41,7 +63,8 @@ const Login = () => {
         <div className='m-2'>
             <h1 className='text-success fw-bolder mt-3'>Please Login</h1>
             {user.Email && <h5><small className='text-danger'>Welcome: {user?.Name}</small></h5>}
-            <form className='m-5'>
+            <form onSubmit={handleLogin} className='m-5'>
+                <p className='text-danger'>{error}</p>
                 <div class="mb-3">
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='please enter your email' />
                 </div>

@@ -9,7 +9,7 @@ import { useState } from 'react';
 firebaseInitialize();
 function App() {
   const [toogle, setToggle] = useState(false);
-  console.log(toogle)
+  // console.log(toogle)
   return (
     <div className="App">
       <div className="row">
