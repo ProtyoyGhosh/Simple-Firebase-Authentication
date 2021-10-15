@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import firebaseInitialize from '../FireBase/Firebase-initialize';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 
 firebaseInitialize();
 const Login = () => {
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const [user, setUser] = useState({});
 
@@ -22,6 +23,20 @@ const Login = () => {
                 setUser(userInfo);
             })
     }
+
+    const signInWithGithub = () => {
+        signInWithPopup(auth, githubProvider)
+            .then((result) => {
+                const { displayName, email, photoURL } = result.user;
+                const userInfo = {
+                    Name: displayName,
+                    Email: email,
+                    Photo: photoURL
+                }
+                setUser(userInfo);
+            })
+    }
+
     return (
         <div className='m-2'>
             <h1 className='text-success fw-bolder'>Please Login</h1>
@@ -37,7 +52,7 @@ const Login = () => {
             </form>
             <div className='p-3'>
                 <button onClick={signInWithGoogle} type="submit" class="btn btn-success me-3">Sign In with Google</button>
-                <button type="submit" class="btn btn-success me-3">Sign In with Github</button>
+                <button onClick={signInWithGithub} type="submit" class="btn btn-success me-3">Sign In with Github</button>
                 <br />
                 <button type="submit" class="btn btn-danger me-3 mt-3">Password Reset</button>
 
