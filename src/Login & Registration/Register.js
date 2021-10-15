@@ -42,8 +42,8 @@ const Register = () => {
     return (
         <div>
             <div className='m-2'>
-                <h1 className='text-success fw-bolder'>Please Register</h1>
-                <h5><small>welcome {user?.Email}</small></h5>
+                <h1 className='text-success fw-bolder mt-5'>Please Register</h1>
+                {user.Email && <h5><small className='text-danger'>Thank You {user?.Email} for Registering</small></h5>}
                 <form onSubmit={handleRegisterSubmit} className='m-5'>
                     <div class="mb-3">
                         <input onChange={handleEmailInput} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='please enter your email' required />

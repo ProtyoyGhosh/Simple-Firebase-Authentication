@@ -39,8 +39,8 @@ const Login = () => {
 
     return (
         <div className='m-2'>
-            <h1 className='text-success fw-bolder'>Please Login</h1>
-            <h5><small>Looged in as: {user?.Name}</small></h5>
+            <h1 className='text-success fw-bolder mt-3'>Please Login</h1>
+            {user.Email && <h5><small className='text-danger'>Welcome: {user?.Name}</small></h5>}
             <form className='m-5'>
                 <div class="mb-3">
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='please enter your email' />
