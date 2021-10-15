@@ -2,6 +2,7 @@ import './App.css';
 import img1 from '../src/images/Mobile.jpg';
 import Login from './Login & Registration/Login';
 import firebaseInitialize from './FireBase/Firebase-initialize';
+import Register from './Login & Registration/Register';
 
 
 firebaseInitialize();
@@ -11,7 +12,8 @@ function App() {
       <div className="row">
         <div className="login-area col-md-6">
 
-          <Login></Login>
+          {/* <Login></Login> */}
+          <Register></Register>
 
           <p className='text-success'>Are you new? Please Register.</p>
           <p className='text-success'>Already have an account?</p>
